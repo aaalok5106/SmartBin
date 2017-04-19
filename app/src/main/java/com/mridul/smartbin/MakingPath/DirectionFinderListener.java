@@ -13,6 +13,6 @@ import com.mridul.smartbin.MakingPath.Route;
 public interface DirectionFinderListener {
 
     void onDirectionFinderStart();
-    void onDirectionFinderSuccess(List<Route> route, int dist, int time);
+    void onDirectionFinderSuccess(List<Route> route, int dist, int time, String origin_id_of_bin);
 
 }

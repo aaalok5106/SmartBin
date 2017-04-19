@@ -32,16 +32,18 @@ public class DirectionFinder {
     private DirectionFinderListener listener;
     private String origin;
     private String destination;
+    private String ORIGIN_BIN_ID ;
 
-    public DirectionFinder(DirectionFinderListener listener, String origin, String destination) {
+    public DirectionFinder(DirectionFinderListener listener, String origin, String destination, String origin_bin_id) {
         this.listener = listener;
         this.origin = origin;
         this.destination = destination;
+        ORIGIN_BIN_ID = origin_bin_id;
     }
 
     public void execute() throws UnsupportedEncodingException {
         listener.onDirectionFinderStart();
-        new DownloadRawData().execute(createUrl());
+        new DownloadRawData().execute(createUrl(), ORIGIN_BIN_ID);
 
         /**
          * Allowing network access in current thread...
@@ -66,38 +68,17 @@ public class DirectionFinder {
 
 
 
-
- /*   private String downloadRawData(String link){
-        try {
-            URL url = new URL(link);
-            InputStream is = url.openConnection().getInputStream();
-            StringBuffer buffer = new StringBuffer();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line + "\n");
-            }
-
-            return buffer.toString();
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }*/
-
     /**
      * Class to download data using google direction api for making path between two points.
      */
 
     private class DownloadRawData extends AsyncTask<String, Void, String> {
 
+        String origin_id_of_bin;
         @Override
         protected String doInBackground(String... params) {
             String link = params[0];
+            origin_id_of_bin = params[1];
             try {
                 URL url = new URL(link);
                 InputStream is = url.openConnection().getInputStream();
@@ -122,7 +103,7 @@ public class DirectionFinder {
         @Override
         protected void onPostExecute(String res) {
             try {
-                parseJSon(res);
+                parseJSon( res, origin_id_of_bin);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -135,7 +116,7 @@ public class DirectionFinder {
      * @param data
      * @throws JSONException
      */
-    private void parseJSon(String data) throws JSONException {
+    private void parseJSon(String data, String origin_id_of_bin) throws JSONException {
         if (data == null)
             return;
 
@@ -174,7 +155,7 @@ public class DirectionFinder {
             routes.add(route);
         }
 
-        listener.onDirectionFinderSuccess(routes, dist, time);
+        listener.onDirectionFinderSuccess(routes, dist, time, origin_id_of_bin);
     }
 
     private List<LatLng> decodePolyLine(final String poly) {
