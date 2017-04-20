@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    >
+
+<fragment
+    android:id="@+id/mapfragment1_filled_bins"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:scrollbars="vertical"
+    class="com.google.android.gms.maps.SupportMapFragment"/>
 
-
-        <Button
-            android:text="Show Filled Bins"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:id="@+id/btn_locate_filled_bins1"
-
-            />
-
-
-    <fragment
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="bottom"
+    android:orientation="horizontal">
+    <Button
+        android:layout_marginBottom="0dp"
+        android:text="Show Filled Bins"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:id="@+id/mapfragment1_filled_bins" />
-
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_locate_filled_bins1"
+        android:background="#604e70b0"
+        />
 </LinearLayout>
+</FrameLayout>
