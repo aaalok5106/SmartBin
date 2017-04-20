@@ -181,7 +181,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-
+            android:onClick="gotologin"
             android:text="Already have an Account ?"
             android:textColor="#d9e5f3"
             android:letterSpacing="0.1"/>

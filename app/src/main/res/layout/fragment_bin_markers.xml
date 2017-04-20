@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<fragment
+    android:id="@+id/mapfragment1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:scrollbars="vertical"
+    class="com.google.android.gms.maps.SupportMapFragment"/>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="bottom"
+    android:orientation="horizontal">
     <Button
+        android:layout_marginBottom="0dp"
         android:text="Locate All Bins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:id="@+id/btn_locate_all_bins"
-
-        />
-
-
-    <fragment
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:id="@+id/mapfragment1" />
-
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_locate_all_bins"
+        android:background="#604e70b0"
+        />
 </LinearLayout>
+</FrameLayout>

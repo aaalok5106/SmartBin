@@ -3,6 +3,7 @@ package com.mridul.smartbin;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -20,18 +21,28 @@ import android.widget.Toast;
 import static com.mridul.smartbin.BackgroundWorkerAccountInfo.ACCOUNT_INFO_json_MOB_NO;
 import static com.mridul.smartbin.BackgroundWorkerAccountInfo.ACCOUNT_INFO_json_NAME;
 import static com.mridul.smartbin.BackgroundWorkerLoginActivity.CURRENT_USER_EMAIL;
+import static com.mridul.smartbin.LoginActivity.isNetworkAvailable;
 
 public class AfterLogin1 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static Toolbar toolbar;
 
+    private Handler mHandler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after_login1);
 
+        if(!isNetworkAvailable(this)) {
+            Toast.makeText(this, "No Internet connection", Toast.LENGTH_LONG).show();
+            mHandler.postDelayed(new Runnable() {
+                public void run() {
+                    finish(); //Calling this method to close this activity when internet is not available.
+                }
+            }, 2000);
 
+        }
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("ManageBin");
         setSupportActionBar(toolbar);
@@ -75,6 +86,7 @@ public class AfterLogin1 extends AppCompatActivity
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(AfterLogin1.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         alert.setNegativeButton("No", null);
@@ -115,6 +127,7 @@ public class AfterLogin1 extends AppCompatActivity
                 // handle clicks here
                 startActivity(new Intent(this,LoginActivity.class));
                 Toast.makeText(this,"You have successfully Logged Out "+CURRENT_USER_EMAIL,Toast.LENGTH_LONG).show();
+                finish();
                 break;
         }
 
@@ -188,11 +201,4 @@ public class AfterLogin1 extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
-
-
-
-
-
-
-
 }
