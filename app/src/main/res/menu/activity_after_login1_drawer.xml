@@ -8,7 +8,7 @@
 
 
         <item android:id="@+id/navigation_bin_locations_all"
-
+            android:icon="@drawable/bin_filled_nav"
             android:title="All Bin Locations" />
 
         <item android:id="@+id/navigation_bin_locations_filled"
@@ -17,11 +17,11 @@
 
 
         <item android:id="@+id/navigation_pickerHome"
-
+            android:icon="@drawable/install_bin_nav"
             android:title="Install Bins" />
 
         <item android:id="@+id/navigation_pathMaker"
-
+            android:icon="@drawable/path_nav"
             android:title="Route Maker" />
 
 
